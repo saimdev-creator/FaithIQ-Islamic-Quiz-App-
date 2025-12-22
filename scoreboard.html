@@ -1,1 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FaithIQ | Scoreboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <meta name="description" content="FaithIQ Scoreboard showing quiz performance and history.">
+
+  <!-- FAVICON -->
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="images/favicon/site.webmanifest">
+  <link rel="shortcut icon" href="images/favicon/favicon.ico">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar faithiq-navbar" aria-label="Main navigation">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a href="index.html" class="d-flex align-items-center gap-2 text-light fw-bold text-decoration-none">
+        <img src="images/Islamic Logo.png" alt="FaithIQ Logo" class="logo">
+        <span>FaithIQ</span>
+      </a>
+
+      <a href="index.html" class="btn btn-outline-light">Home</a>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="page-content" role="main">
+
+    <!-- SCOREBOARD SECTION -->
+    <section class="container my-5" aria-label="Scoreboard section">
+
+      <!-- TITLE -->
+      <h1 class="text-center mb-3">📊 Scoreboard</h1>
+       <p class="text-center text-muted small mb-4">
+        
+      <!-- Optional note (already discussed) -->
+      <p class="text-center text-muted small mb-4">
+        Note: Your quiz history is stored only in this browser (local storage).
+        It will not sync across devices or websites.
+      </p>
+
+      <!-- STATS -->
+      <div class="row text-center mb-4" aria-label="Score statistics">
+        <div class="col-md-3 col-6 mb-3 mb-md-0">
+          <div class="stat-card">
+            Total Attempts<br>
+            <b id="totalAttempts" aria-live="polite">0</b>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 mb-3 mb-md-0">
+          <div class="stat-card">
+            Total Correct<br>
+            <b id="totalCorrect" aria-live="polite">0</b>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-card">
+            Total Wrong<br>
+            <b id="totalWrong" aria-live="polite">0</b>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-card">
+            Accuracy<br>
+            <b id="accuracy" aria-live="polite">0%</b>
+          </div>
+        </div>
+      </div>
+
+      <!-- HISTORY TABLE -->
+      <div class="table-responsive" aria-label="Score history table">
+        <table class="table table-bordered text-center align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Category</th>
+              <th scope="col">Score</th>
+              <th scope="col">Total</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody id="scoreHistory">
+            <!-- JS will inject rows -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="text-center mt-4">
+        <button class="btn btn-danger me-2" type="button" onclick="clearHistory()">
+          Clear History
+        </button>
+        <a href="index.html" class="btn btn-primary">Back to Home</a>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="faithiq-footer text-center">
+    © 2025 <strong>FaithIQ</strong> | Learn Islam Through Knowledge
+  </footer>
+
+  <!-- JS -->
+  <script src="js/script.js"></script>
+</body>
+</html>
 
