@@ -1,1 +1,751 @@
+/************************************************************
+ * FaithIQ - style.css (FULL + CLEAN + SAFE REFACTOR)
+ * Goal: readability + structure + no UI break
+ * Note: All original UI parts kept (hero, stats, cards, quiz,
+ *       timers, progress, footer, animations, result medal card)
+ ************************************************************/
+
+/* ===================== 1) THEME VARIABLES ===================== */
+:root {
+  --primary-blue: #1e3a8a;      /* Deep Islamic Blue */
+  --accent-emerald: #10b981;    /* Emerald */
+  --accent-gold: #d97706;       /* Gold */
+  --light-bg: #f3f4f6;          /* Light background */
+  --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --grad: linear-gradient(135deg, #10b981, #d97706);
+}
+
+/* ===================== 2) BASE / GLOBAL ===================== */
+html, body {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--light-bg);
+  color: #1f2937;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+
+  /* Footer bottom fix (only works if you wrap page content in .page-content) */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Optional wrapper to push footer to bottom */
+.page-content { flex: 1; }
+
+/* Media safety */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ===================== 3) ACCESSIBILITY HELPERS ===================== */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ===================== 4) NAVBAR ===================== */
+.faithiq-navbar {
+  background: var(--primary-blue) !important;
+  padding: 0.75rem 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Brand text */
+.navbar-brand strong {
+  color: #fff !important;
+  font-size: 1.4rem;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.navbar-brand small {
+  color: rgba(255,255,255,0.85) !important;
+}
+
+/* Keep navbar brand alignment */
+.faithiq-navbar .navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Logo (merged + responsive below) */
+.logo {
+  height: 48px;
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.3s ease;
+
+  /* image quality */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Quiz info pill (if used) */
+.quiz-info-pill {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 6px 18px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid rgba(255,255,255,0.2);
+  display: inline-block;
+}
+
+/* Quiz navbar info text */
+.quiz-info {
+  color: #fff !important;
+  font-weight: 600;
+}
+
+/* Main timer */
+#timer {
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: #fff !important;
+  transition: color 0.3s ease;
+}
+
+#timer.red {
+  color: #ff4d4d !important;
+  animation: pulse 1s infinite;
+}
+
+/* Home button adjustment on quiz page */
+.faithiq-navbar .btn-secondary {
+  margin-left: 20px;
+  padding: 8px 20px;
+  font-size: 0.9rem;
+}
+
+/* ===================== 5) HERO SECTION ===================== */
+.hero-section {
+  padding: 60px 0;
+  background: #fff;
+  margin-bottom: 0;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  padding-right: 20px;
+}
+
+.hero-title {
+  font-weight: 800;
+  font-size: 2.8rem;
+  color: var(--primary-blue);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  color: #4b5563;
+  line-height: 1.8;
+  margin-bottom: 30px;
+  text-align: justify;
+  max-width: 550px;
+}
+
+.hero-image-placeholder {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+.hero-image:hover {
+  transform: scale(1.03);
+}
+
+/* Hero buttons (View Answers style) */
+.hero-buttons .btn-outline-primary,
+.hero-buttons .btn-lg:not(.btn-primary) {
+  border: 2px solid #0d6efd;
+  color: #0d6efd;
+  background: transparent;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.hero-buttons .btn-lg:not(.btn-primary):hover {
+  background-color: #0d6efd;
+  color: #fff !important;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(13, 110, 253, 0.2);
+}
+
+/* ===================== 6) STATS SECTION ===================== */
+.stats-section {
+  padding: 40px 0;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.stat-box h3 {
+  color: var(--accent-emerald);
+  font-weight: 800;
+  font-size: 2.5rem;
+  margin-bottom: 5px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.stat-box p {
+  color: #475569;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0;
+}
+
+.stat-box:hover {
+  background: #fff;
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+}
+
+.stat-box:hover h3 {
+  color: var(--accent-gold);
+  transform: scale(1.1);
+}
+
+/* ===================== 7) CATEGORIES ===================== */
+.categories-section {
+  padding: 80px 0;
+  background-color: #f8fafc;
+}
+
+.category-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border: 1px solid #f1f5f9;
+  overflow: hidden;
+}
+
+.category-card {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-14px);
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.18);
+}
+
+
+.category-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.category-card img {
+  transition: transform 0.4s ease;
+}
+
+.category-card:hover img {
+  transform: scale(1.06);
+}
+
+
+.category-card h4 {
+  color: var(--primary-blue);
+  font-weight: 700;
+  padding: 0 20px;
+  margin-bottom: 10px;
+}
+
+.category-card p {
+  flex-grow: 1;
+  color: #64748b;
+  font-size: 0.95rem;
+  padding: 0 25px 20px;
+  line-height: 1.5;
+}
+
+/* Start Quiz button */
+.category-card .btn-success {
+  width: auto;
+  align-self: center;
+  min-width: 160px;
+  margin: 0 25px 30px;
+
+  padding: 10px 20px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  background: var(--grad);
+  border: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+}
+
+.category-card .btn-success:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.category-card img {
+  transition: transform 0.4s ease;
+}
+
+.category-card:hover img {
+  transform: scale(1.06);
+}
+
+
+/* ===================== 8) QUIZ UI ===================== */
+.quiz-card {
+  background: #fff;
+  max-width: 700px;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: var(--card-shadow);
+  margin-top: 20px;
+}
+
+/* Option buttons */
+.option-btn {
+  width: 100%;
+  padding: 15px 20px;
+  margin-bottom: 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  text-align: left;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.option-btn:hover {
+  border-color: var(--accent-emerald);
+  background: #ecfdf5;
+}
+
+/* Selected state (optional) */
+.option-btn.selected {
+  border-color: var(--accent-emerald);
+  background-color: #d1fae5;
+}
+
+/* Feedback */
+.option-btn.correct {
+  background-color: #d1fae5 !important;
+  border-color: #10b981 !important;
+  color: #065f46 !important;
+}
+
+.option-btn.wrong {
+  background-color: #fee2e2 !important;
+  border-color: #ef4444 !important;
+  color: #991b1b !important;
+}
+
+/* Explanation box */
+#explanation-container {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  display: none;
+}
+
+#explanation-container.show {
+  display: block;
+  animation: fadeIn 0.4s ease;
+}
+
+/* True/False styles */
+.explanation-true {
+  background-color: #d1fae5 !important;
+  color: #065f46 !important;
+  border: 1px solid #10b981 !important;
+  display: block !important;
+}
+
+.explanation-false {
+  background-color: #fee2e2 !important;
+  color: #991b1b !important;
+  border: 1px solid #f87171 !important;
+  display: block !important;
+}
+
+#explanation-container strong {
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+/* ===================== 9) QUESTION META + PROGRESS ===================== */
+.question-meta {
+  font-weight: 600;
+  color: #0f172a;
+  font-size: 0.95rem;
+}
+
+/* Per question timer badge */
+.question-timer {
+  font-weight: 800;
+  color: #16a34a;
+  font-size: 0.95rem;
+}
+
+.question-timer.red {
+  color: #ef4444;
+}
+
+/* Progress bar */
+.progress.question-progress {
+  height: 8px;
+  background-color: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+#progressBar {
+  width: 0%;
+  background: var(--grad);
+  transition: width 0.3s ease;
+}
+
+/* ===================== 10) QUIZ CONTROLS ===================== */
+.quiz-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.quiz-controls .btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 12px 25px;
+  font-weight: 700;
+  border-radius: 12px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.quiz-controls .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Button palette */
+.btn-success {
+  background: var(--grad);
+  border: none;
+  color: #fff;
+}
+
+.btn-warning {
+  background-color: #f59e0b;
+  color: #fff;
+  border: none;
+}
+
+.btn-secondary {
+  background-color: #6b7280;
+  color: #fff;
+  border: none;
+}
+
+/* ===================== 11) SCOREBOARD (if you use badges) ===================== */
+/* Add these only if you already have green-badge, yellow-badge, red-badge classes in HTML */
+.green-badge { background: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 999px; font-weight: 700; }
+.yellow-badge { background: #fef9c3; color: #854d0e; padding: 4px 10px; border-radius: 999px; font-weight: 700; }
+.red-badge { background: #fee2e2; color: #991b1b; padding: 4px 10px; border-radius: 999px; font-weight: 700; }
+
+/* ===================== 12) FOOTER ===================== */
+.faithiq-footer {
+  background: linear-gradient(135deg, #0f172a, #1e1b4b);
+  color: #fff;
+  padding: 40px 20px 30px 20px;
+  margin-top: 80px;
+  border-top: 4px solid #f59e0b;
+  text-align: center;
+}
+
+.footer-logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.footer-logo span { color: #f59e0b; }
+
+.footer-section p {
+  color: #cbd5e1;
+  max-width: 600px;
+  margin: 0 auto 25px auto;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+}
+
+.footer-bottom p {
+  font-size: 0.85rem;
+  color: #e5e7eb;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* ===================== 13) ANIMATIONS ===================== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Reveal animation */
+@keyframes stylishReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9) rotateX(-10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0);
+  }
+}
+
+/* Shimmer */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Apply reveal animation */
+.hero-text h1 {
+  animation: stylishReveal 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.hero-description {
+  animation: stylishReveal 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+.category-card {
+  opacity: 0;
+  animation: stylishReveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  backface-visibility: hidden;
+}
+
+.col-lg-4:nth-child(1) .category-card { animation-delay: 0.3s; }
+.col-lg-4:nth-child(2) .category-card { animation-delay: 0.5s; }
+.col-lg-4:nth-child(3) .category-card { animation-delay: 0.7s; }
+
+/* ===================== 14) RESULT (QUIZ COMPLETED - MEDAL UI) ===================== */
+.result-section {
+  padding: 60px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.result-card {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #e5e7eb;
+  border-radius: 24px;
+  padding: 40px 30px 35px;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+.result-card::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at top, rgba(250, 204, 21, 0.18), transparent 55%);
+  opacity: 0.9;
+  z-index: 0;
+}
+
+.result-card > * { position: relative; z-index: 1; }
+
+.result-medal-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.result-ribbon {
+  position: absolute;
+  top: 70px;
+  width: 110px;
+  height: 80px;
+  background: linear-gradient(135deg, #f59e0b, #b45309);
+  clip-path: polygon(0 0, 100% 0, 80% 100%, 50% 70%, 20% 100%);
+  opacity: 0.9;
+  z-index: 0;
+}
+
+.result-medal {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 20%, #fef3c7, #fbbf24, #b45309);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  border: 4px solid rgba(255, 255, 255, 0.7);
+  z-index: 1;
+}
+
+.result-medal-score {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #78350f;
+}
+
+.result-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.result-subtitle {
+  color: #e5e7eb;
+  font-size: 0.98rem;
+}
+
+.result-score {
+  font-size: 1.1rem;
+}
+
+.result-category span {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.result-card .btn-primary {
+  background: var(--grad);
+  border: none;
+  font-weight: 600;
+}
+
+.result-card .btn-outline-success,
+.result-card .btn-outline-secondary {
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.result-card .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* ===================== 15) RESPONSIVE ===================== */
+/* Hero mobile alignment */
+@media (max-width: 991px) {
+  .hero-section { padding: 40px 15px; }
+
+  .hero-text {
+    text-align: center;
+    align-items: center;
+    padding-right: 0;
+    margin-bottom: 30px;
+  }
+
+  .hero-title { font-size: 2rem; }
+
+  .hero-description {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .hero-image-placeholder {
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .hero-image { max-width: 100%; }
+}
+
+/* Category mobile tweaks */
+@media (max-width: 768px) {
+  .category-card img { height: 180px; }
+  .category-card .btn-success { width: 80%; }
+}
+
+/* Quiz control buttons mobile */
+@media (max-width: 576px) {
+  .quiz-controls { flex-direction: column; }
+  .quiz-controls .btn { width: 100%; }
+}
+
+/* Logo responsive sizes */
+@media (max-width: 480px) {
+  .logo { height: 36px; max-width: 140px; }
+}
+@media (max-width: 640px) {
+  .logo { height: 40px; max-width: 150px; }
+}
+@media (min-width: 640px) and (max-width: 1024px) {
+  .logo { height: 44px; max-width: 160px; }
+}
+@media (min-width: 1024px) {
+  .logo { height: 52px; max-width: 200px; }
+}
 
