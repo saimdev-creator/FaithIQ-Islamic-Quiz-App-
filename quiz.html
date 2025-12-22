@@ -1,1 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- BASIC META -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FaithIQ Quiz | Test Your Islamic Knowledge</title>
+
+  <!-- SEO META -->
+  <meta name="description" content="Attempt Islamic MCQ quizzes with timer, score tracking, and instant results on FaithIQ.">
+  <meta name="keywords" content="Islamic Quiz, MCQs Islam, Quran Quiz, FaithIQ">
+  <meta name="author" content="FaithIQ">
+
+  <!-- FAVICON -->
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="images/favicon/site.webmanifest">
+  <link rel="shortcut icon" href="images/favicon/favicon.ico">
+
+  <!-- GOOGLE FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- BOOTSTRAP -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- CUSTOM CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+  <nav class="navbar faithiq-navbar" aria-label="Main navigation">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <img src="images/Islamic Logo.png" alt="FaithIQ Logo" class="logo">
+        <strong class="ms-2 text-light">FaithIQ Quiz</strong>
+      </div>
+
+      <div class="d-flex align-items-center gap-3">
+        <div class="quiz-info text-light" aria-live="polite">
+          ⏱ Time: <span id="timer">5:00</span> |
+          ⭐ Score: <span id="score">0</span>
+        </div>
+        <a href="index.html" class="btn btn-secondary">Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="page-content" role="main">
+
+    <!-- Page heading for accessibility (hidden visually) -->
+    <h1 class="visually-hidden">FaithIQ Islamic Quiz</h1>
+
+    <!-- ================= QUIZ SECTION ================= -->
+    <section class="quiz-section" aria-label="Quiz section">
+      <div class="container">
+        <div class="quiz-card mx-auto">
+
+          <!-- QUESTION META: NUMBER + PER-QUESTION TIMER -->
+          <div class="question-meta d-flex justify-content-between align-items-center mb-2">
+            <div class="question-count">
+              Question <span id="currentQ">1</span> / <span id="totalQ">10</span>
+            </div>
+
+            <div class="question-timer" aria-live="polite">
+              Q Time: <span id="questionTimer">15</span>s
+            </div>
+          </div>
+
+          <!-- PROGRESS BAR -->
+          <div class="progress question-progress mb-3" aria-label="Quiz progress">
+            <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+
+          <!-- QUESTION (h2 for proper heading order under h1) -->
+          <h2 id="questionText" class="mb-4">
+            Loading question...
+          </h2>
+
+          <!-- OPTIONS -->
+          <div class="options-list">
+            <button class="option-btn" onclick="selectAnswer(this)" type="button">Option 1</button>
+            <button class="option-btn" onclick="selectAnswer(this)" type="button">Option 2</button>
+            <button class="option-btn" onclick="selectAnswer(this)" type="button">Option 3</button>
+            <button class="option-btn" onclick="selectAnswer(this)" type="button">Option 4</button>
+          </div>
+
+          <!-- ANSWER EXPLANATION (NO INLINE STYLE) -->
+          <div id="explanation-container" class="mt-3 p-3 rounded" aria-live="polite"></div>
+
+          <!-- CONTROLS -->
+          <div class="quiz-controls mt-4 d-flex justify-content-between flex-wrap gap-2">
+            <button class="btn btn-warning" onclick="resetQuiz()" type="button">Reset</button>
+            <button class="btn btn-secondary" onclick="quitQuiz()" type="button">Quit</button>
+            <button class="btn btn-success" onclick="nextQuestion()" type="button">Next</button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= RESULT SCREEN ================= -->
+    <section id="resultScreen" class="result-section d-none" aria-label="Quiz result">
+      <div class="container">
+        <div class="result-card mx-auto text-center">
+
+          <!-- MEDAL AREA -->
+          <div class="result-medal-wrapper">
+            <div class="result-ribbon"></div>
+            <div class="result-medal">
+              <span class="result-medal-score" id="finalPercent">0%</span>
+            </div>
+          </div>
+
+          <!-- TITLE & MESSAGE -->
+          <h2 class="mt-3" id="resultTitle">Quiz Completed!</h2>
+          <p class="result-subtitle mb-1" id="resultSubtitle">
+            Nice effort! Keep strengthening your Iman with knowledge.
+          </p>
+
+          <!-- SCORE INFO -->
+          <p class="result-score mt-3">
+            Score:
+            <strong>
+              <span id="finalScore">0</span> /
+              <span id="finalTotal">10</span>
+            </strong>
+          </p>
+
+          <p class="result-category small text-muted">
+            Category: <span id="finalCategory">Pillars</span>
+          </p>
+
+          <!-- BUTTONS -->
+          <div class="mt-4 d-flex justify-content-center gap-2 flex-wrap">
+            <a href="index.html" class="btn btn-primary px-4">Back to Home</a>
+            <button class="btn btn-outline-success px-4" onclick="resetQuiz()" type="button">Retry Quiz</button>
+            <a href="scoreboard.html" class="btn btn-outline-secondary px-4">View Scoreboard</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="faithiq-footer text-center">
+    © 2025 <strong>FaithIQ</strong> | Knowledge Strengthens Faith
+  </footer>
+
+  <!-- BOOTSTRAP JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- CUSTOM JS -->
+  <script src="js/script.js"></script>
+</body>
+</html>
 
