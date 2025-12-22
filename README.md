@@ -48,7 +48,7 @@ FaithIQ/
 │
 ├── css/
 │ ├── style.css
-│ └── responsive.css
+│ 
 │
 ├── js/
 │ ├── script.js
